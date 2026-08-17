@@ -1,0 +1,30 @@
+{
+  "name": "fastgo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FastGo — Zimbabwe-first digital mobility and ride-hailing platform",
+  "scripts": {
+    "dev": "next dev -p 47613",
+    "build": "next build",
+    "start": "next start -p 47613",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.3",
+    "leaflet": "^1.9.4",
+    "next": "^15.4.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-leaflet": "^5.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.0",
+    "typescript": "^5.8.0"
+  }
+}
