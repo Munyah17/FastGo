@@ -155,6 +155,12 @@ export const Clock = (p: IconProps) =>
 export const Loader2 = (p: IconProps) =>
   base(p, <path d="M12 3a9 9 0 1 0 9 9" />);
 
+export const X = (p: IconProps) =>
+  base(p, <><line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" /></>);
+
+export const ListIcon = (p: IconProps) =>
+  base(p, <><line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" /><circle cx="3.5" cy="6" r="1.3" fill="currentColor" stroke="none" /><circle cx="3.5" cy="12" r="1.3" fill="currentColor" stroke="none" /><circle cx="3.5" cy="18" r="1.3" fill="currentColor" stroke="none" /></>);
+
 export const Lock = (p: IconProps) =>
   base(p, <><rect x="4" y="10.5" width="16" height="10.5" rx="2" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" /></>);
 

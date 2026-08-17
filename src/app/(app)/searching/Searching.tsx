@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import MapMock from "@/components/MapMock";
 import { Card } from "@/components/ui";
+import Avatar from "@/components/Avatar";
 import { Car, Star, CheckCircle } from "@/components/Icons";
 import { driverOffers, fmt } from "@/lib/data";
 
@@ -61,9 +62,7 @@ export default function Searching() {
           {shown.map((o) => (
             <Card key={o.id} className="px-4 py-3.5">
               <div className="flex items-center gap-3">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-soft text-[14px] font-bold text-brand">
-                  {o.name.split(" ").map((w) => w[0]).join("")}
-                </span>
+                <Avatar name={o.name} size={44} className="text-[14px]" />
                 <span className="min-w-0 flex-1">
                   <span className="flex items-center gap-1.5 text-[14px] font-semibold">
                     {o.name}

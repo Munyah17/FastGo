@@ -7,12 +7,16 @@ export type AppMode = "passenger" | "driver";
 const ModeContext = createContext<{
   mode: AppMode;
   setMode: (m: AppMode) => void;
+  drawerOpen: boolean;
+  openDrawer: () => void;
+  closeDrawer: () => void;
 } | null>(null);
 
 const STORAGE_KEY = "fastgo-mode";
 
 export function ModeProvider({ children }: { children: React.ReactNode }) {
   const [mode, setModeState] = useState<AppMode>("passenger");
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
@@ -25,7 +29,15 @@ export function ModeProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <ModeContext.Provider value={{ mode, setMode }}>
+    <ModeContext.Provider
+      value={{
+        mode,
+        setMode,
+        drawerOpen,
+        openDrawer: () => setDrawerOpen(true),
+        closeDrawer: () => setDrawerOpen(false),
+      }}
+    >
       {children}
     </ModeContext.Provider>
   );

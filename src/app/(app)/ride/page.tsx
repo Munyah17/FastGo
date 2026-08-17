@@ -1,17 +1,16 @@
 import Link from "next/link";
-import MapMock from "@/components/MapMock";
 import { Card } from "@/components/ui";
+import Avatar from "@/components/Avatar";
 import {
   ChevronDown,
   Shield,
-  MapPin,
   Star,
   Phone,
   Chat,
   ShieldCheck,
 } from "@/components/Icons";
 import { activeRide, driverOffers, fmt } from "@/lib/data";
-import RideAutoComplete from "./RideAutoComplete";
+import RideTrackingMap from "./RideTrackingMap";
 import ShareTripButton from "./ShareTripButton";
 
 export default async function RidePage({
@@ -23,16 +22,14 @@ export default async function RidePage({
   const picked = driverOffers.find((o) => o.id === offer);
 
   const driver = picked
-    ? { name: picked.name, rating: picked.rating }
+    ? { name: picked.name, rating: picked.rating, phone: picked.phone }
     : activeRide.driver;
   const vehicleLabel = picked ? picked.vehicle : `${activeRide.vehicle.model} • ${activeRide.vehicle.colour}`;
   const plate = picked ? picked.vehicle.split("•").pop()?.trim() : activeRide.vehicle.plate;
-  const etaMinutes = picked ? picked.etaMin : activeRide.etaMinutes;
   const fare = picked ? picked.fare : activeRide.fare;
 
   return (
     <div>
-      <RideAutoComplete />
       <header className="sticky top-0 z-20 flex items-center justify-between bg-page/95 px-4 py-4 backdrop-blur">
         <Link
           href="/book"
@@ -51,28 +48,11 @@ export default async function RidePage({
         </Link>
       </header>
 
-      <div className="relative">
-        <MapMock className="h-64" showCar />
-        <Card className="absolute inset-x-4 top-3 flex items-center gap-3 px-4 py-3 shadow-lg">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-good-soft text-good">
-            <MapPin size={17} />
-          </span>
-          <span>
-            <span className="block text-[14.5px] font-semibold">
-              {etaMinutes} min away
-            </span>
-            <span className="block text-[12.5px] text-sub">
-              Your driver is on the way
-            </span>
-          </span>
-        </Card>
-      </div>
+      <RideTrackingMap pickup={activeRide.pickup} dropoff={activeRide.dropoff} />
 
       <div className="px-4 pb-6">
         <Card className="mt-4 flex items-center gap-3 px-4 py-3.5">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-soft text-[15px] font-bold text-brand">
-            {driver.name.split(" ").map((w) => w[0]).join("")}
-          </span>
+          <Avatar name={driver.name} size={44} className="text-[15px]" />
           <span className="flex-1">
             <span className="flex items-center gap-1.5 text-[14.5px] font-semibold">
               {driver.name}
@@ -89,18 +69,20 @@ export default async function RidePage({
             )}
           </span>
           <span className="flex gap-2">
-            <button
+            <a
+              href={`tel:${driver.phone}`}
               aria-label="Call driver"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-sub"
             >
               <Phone size={17} />
-            </button>
-            <button
+            </a>
+            <Link
+              href="/messages/chat"
               aria-label="Message driver"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-brand text-white"
             >
               <Chat size={17} />
-            </button>
+            </Link>
           </span>
         </Card>
 

@@ -1,14 +1,34 @@
 // Mock data for the FastGo prototype. In production this comes from the
 // FastGo Core API (Supabase/PostgreSQL + dispatch, pricing, compliance engines).
 
+// Matches supabase/migrations/0019_arrival_waiting_fee.sql
+export const FREE_WAIT_MINUTES = 3;
+export const WAITING_FEE_PER_MIN = 0.1;
+
+// Matches supabase/migrations/0019's ride_requests extra_passenger_fee /
+// heavy_luggage_fee columns — declared upfront by the passenger, not
+// discovered by the driver mid-trip.
+export const EXTRA_PASSENGER_FEE = 0.5;
+export const HEAVY_LUGGAGE_FEE = 1.0;
+export const MAX_EXTRA_PASSENGERS = 3;
+
+export const waitingDisputeReasons = [
+  "Driver wasn't actually at the pickup point",
+  "Driver arrived early and started the timer unfairly",
+  "I was already waiting — this is inaccurate",
+  "Other",
+];
+
 export const user = {
   name: "Tawanda M.",
   firstName: "Tawanda",
+  avatarUrl: null as string | null,
   rating: 4.9,
   trips: 1247,
   acceptance: 98,
   driverSince: "Jan 2024",
   walletBalance: 18.45,
+  memberSinceMonths: 26,
 };
 
 export const savedPlaces = [
@@ -24,7 +44,7 @@ export const rideOptions = [
 ];
 
 export const activeRide = {
-  driver: { name: "Blessing M.", rating: 4.9 },
+  driver: { name: "Blessing M.", rating: 4.9, phone: "+263772234567" },
   vehicle: { model: "Toyota Allion", colour: "Silver", plate: "AFD 1234" },
   etaMinutes: 2,
   pickup: "My Location",
@@ -393,6 +413,7 @@ export const driverOffers = [
     id: "off-1",
     name: "Blessing M.",
     rating: 4.9,
+    phone: "+263772234567",
     vehicle: "Toyota Allion • Silver • AFD 1234",
     etaMin: 3,
     fare: 5.5,
@@ -402,6 +423,7 @@ export const driverOffers = [
     id: "off-2",
     name: "Tinashe K.",
     rating: 4.7,
+    phone: "+263774451290",
     vehicle: "Toyota Wish • White • AFC 5512",
     etaMin: 5,
     fare: 5.0,
@@ -411,6 +433,7 @@ export const driverOffers = [
     id: "off-3",
     name: "Farai M.",
     rating: 4.95,
+    phone: "+263776603345",
     vehicle: "Toyota Axio • Blue • AGX 8834",
     etaMin: 6,
     fare: 6.0,
@@ -423,6 +446,7 @@ export const incomingRequests = [
     id: "req-8831",
     passenger: "Nyasha C.",
     rating: 4.7,
+    phone: "+263785529012",
     pickup: "Avondale Shops",
     dropoff: "Borrowdale Brooke",
     distanceKm: 1.4,
@@ -433,6 +457,7 @@ export const incomingRequests = [
     id: "req-8832",
     passenger: "Kudzai T.",
     rating: 4.5,
+    phone: "+263713407723",
     pickup: "Eastgate Mall",
     dropoff: "Msasa",
     distanceKm: 2.1,
@@ -443,6 +468,7 @@ export const incomingRequests = [
     id: "req-8833",
     passenger: "Rufaro P.",
     rating: 4.9,
+    phone: "+263779021188",
     pickup: "Harare CBD, 1st St",
     dropoff: "Chitungwiza CBD",
     distanceKm: 3.6,

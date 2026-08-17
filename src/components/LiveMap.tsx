@@ -16,9 +16,19 @@ function pinIcon(color: string, size = 34) {
   });
 }
 
+function carIcon(color: string, size = 30) {
+  return L.divIcon({
+    className: "",
+    html: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" style="filter:drop-shadow(0 2px 3px rgba(0,0,0,.4))"><circle cx="12" cy="12" r="11" fill="white"/><g transform="translate(12 12) scale(0.62) translate(-12 -12)"><path d="M4 16v-4l2-5a2 2 0 0 1 1.9-1.3h8.2A2 2 0 0 1 18 7l2 5v4" fill="none" stroke="${color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.5 16h19" stroke="${color}" stroke-width="2.2" stroke-linecap="round"/><circle cx="7.5" cy="16" r="1.6" fill="${color}"/><circle cx="16.5" cy="16" r="1.6" fill="${color}"/></g></svg>`,
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+  });
+}
+
 const brandPin = pinIcon("#4f46e5");
 const greenPin = pinIcon("#16a34a", 28);
 const redPin = pinIcon("#dc2626", 28);
+const vehicleIcon = carIcon("#4f46e5");
 
 function CenterTracker({ onCenterChange }: { onCenterChange?: (lat: number, lon: number) => void }) {
   const map = useMapEvents({
@@ -90,7 +100,16 @@ export default function LiveMap({
           <Marker
             key={i}
             position={m.position}
-            icon={m.kind === "pickup" ? greenPin : m.kind === "dropoff" ? redPin : brandPin}
+            icon={
+              m.kind === "pickup"
+                ? greenPin
+                : m.kind === "dropoff"
+                  ? redPin
+                  : m.kind === "vehicle"
+                    ? vehicleIcon
+                    : brandPin
+            }
+            zIndexOffset={m.kind === "vehicle" ? 1000 : 0}
           />
         ))}
       </MapContainer>

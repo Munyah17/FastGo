@@ -1,4 +1,5 @@
 import { ScreenHeader, Card, ListRow, Divider } from "@/components/ui";
+import Avatar from "@/components/Avatar";
 import {
   User,
   Car,
@@ -8,6 +9,7 @@ import {
   Question,
   Doc,
   ShieldCheck,
+  Wallet,
 } from "@/components/Icons";
 import { user } from "@/lib/data";
 
@@ -17,9 +19,7 @@ export default function SettingsPage() {
       <ScreenHeader title="Settings" back="/profile" />
       <div className="px-4 pb-6">
         <Card className="flex items-center gap-3 px-4 py-3.5">
-          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-soft text-[15px] font-bold text-brand">
-            TM
-          </span>
+          <Avatar name={user.name} avatarUrl={user.avatarUrl} size={48} className="text-[15px]" />
           <span className="flex-1">
             <span className="block text-[15px] font-semibold">{user.name}</span>
             <span className="block text-[12.5px] text-sub">
@@ -57,6 +57,13 @@ export default function SettingsPage() {
             icon={<ShieldCheck size={17} />}
             title="Rider Verification"
             subtitle="3 of 4 completed"
+          />
+          <Divider />
+          <ListRow
+            href="/settings/payments"
+            icon={<Wallet size={17} />}
+            title="Payments You Accept"
+            subtitle="As a driver — all methods or wallet only"
           />
         </Card>
 

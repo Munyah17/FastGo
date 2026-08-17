@@ -1,7 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import MapMock from "@/components/MapMock";
-import ModeToggle from "@/components/ModeToggle";
 import FareOfferBar from "./FareOfferBar";
+import { useMode } from "@/lib/ModeContext";
 import {
   Menu,
   Bell,
@@ -24,20 +26,20 @@ const categories = [
 ];
 
 export default function PassengerHome() {
+  const { openDrawer } = useMode();
   return (
     <div>
       <div className="relative h-[54vh] min-h-[360px] overflow-hidden">
         <MapMock className="h-full" />
 
         <div className="absolute inset-x-4 top-4 flex items-center justify-between gap-2">
-          <Link
-            href="/profile"
+          <button
+            onClick={openDrawer}
             aria-label="Menu"
             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-lg"
           >
             <Menu size={20} />
-          </Link>
-          <ModeToggle />
+          </button>
           <Link
             href="/notifications"
             aria-label="Notifications"

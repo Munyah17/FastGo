@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { Card, ListRow, Divider, Badge } from "@/components/ui";
+import Avatar from "@/components/Avatar";
+import TierBadge from "@/components/TierBadge";
+import { computeTier, nextTierRequirement } from "@/lib/tier";
 import {
   Gear,
   Star,
@@ -10,10 +13,14 @@ import {
   Question,
   Car,
   Users,
+  Upload,
 } from "@/components/Icons";
 import { user, documents } from "@/lib/data";
 
 export default function ProfilePage() {
+  const tier = computeTier(user.trips, user.rating, user.memberSinceMonths);
+  const nextTier = nextTierRequirement(user.trips, user.rating, user.memberSinceMonths);
+
   return (
     <div className="px-4">
       <header className="flex items-center justify-between py-4">
@@ -25,8 +32,14 @@ export default function ProfilePage() {
       </header>
 
       <div className="flex items-center gap-4">
-        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand-soft text-[20px] font-bold text-brand">
-          TM
+        <span className="relative">
+          <Avatar name={user.name} avatarUrl={user.avatarUrl} size={64} className="text-[20px]" />
+          <button
+            aria-label="Upload profile photo"
+            className="absolute -bottom-0.5 -right-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-brand text-white ring-2 ring-white"
+          >
+            <Upload size={11} />
+          </button>
         </span>
         <div>
           <div className="flex items-center gap-2">
@@ -35,14 +48,21 @@ export default function ProfilePage() {
               <Star size={13} className="text-amber-400" /> {user.rating}
             </span>
           </div>
-          <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-good-soft px-2 py-0.5 text-[11.5px] font-semibold text-good">
-            <ShieldCheck size={12} /> Verified Partner
-          </span>
+          <div className="mt-1 flex items-center gap-1.5">
+            <span className="inline-flex items-center gap-1 rounded-full bg-good-soft px-2 py-0.5 text-[11.5px] font-semibold text-good">
+              <ShieldCheck size={12} /> Verified Partner
+            </span>
+            <TierBadge tier={tier} />
+          </div>
           <div className="mt-1 text-[12.5px] text-sub">
             FastGo Partner since {user.driverSince}
           </div>
         </div>
       </div>
+
+      {nextTier && (
+        <p className="mt-2 text-[11.5px] text-sub">{nextTier}</p>
+      )}
 
       <Card className="mt-4 flex divide-x divide-line py-3.5 text-center">
         <div className="flex-1">
