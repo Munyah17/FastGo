@@ -57,8 +57,8 @@ export default function FareOfferBar() {
       {showError && (
         <p className="mt-1.5 px-1 text-[12px] font-medium text-bad">
           {fare.trim() === ""
-            ? `Enter an offer to send your request — minimum ${fmt(MINIMUM_FARE)}.`
-            : `Offers below ${fmt(MINIMUM_FARE)} aren't accepted — try a higher amount.`}
+            ? `Enter an offer to send your request. Minimum ${fmt(MINIMUM_FARE)}.`
+            : `Offers below ${fmt(MINIMUM_FARE)} aren't accepted. Try a higher amount.`}
         </p>
       )}
 
@@ -70,7 +70,7 @@ export default function FareOfferBar() {
           <span className="flex-1 text-left">
             <span className="block text-[13.5px] font-semibold">Extra Passengers</span>
             <span className="block text-[11.5px] text-sub">
-              Beyond yourself — {fmt(EXTRA_PASSENGER_FEE)} each, for fairness
+              Beyond yourself: {fmt(EXTRA_PASSENGER_FEE)} each, for fairness
             </span>
           </span>
           <span className="flex shrink-0 items-center gap-2.5">
@@ -104,7 +104,7 @@ export default function FareOfferBar() {
           <span className="flex-1">
             <span className="block text-[13.5px] font-semibold">Luggage Over 10kg</span>
             <span className="block text-[11.5px] text-sub">
-              Extra loading time &amp; space — {fmt(HEAVY_LUGGAGE_FEE)} flat fee
+              Extra loading time &amp; space: {fmt(HEAVY_LUGGAGE_FEE)} flat fee
             </span>
           </span>
           <span

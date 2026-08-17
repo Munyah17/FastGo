@@ -2,15 +2,26 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useMode } from "@/lib/ModeContext";
+import { useCity } from "@/lib/CityContext";
 import { Card } from "@/components/ui";
-import { Menu, Bell, Flag, ListIcon, ChevronRight } from "@/components/Icons";
+import { Menu, Bell, ListIcon, ChevronRight, Loader2, Navigation } from "@/components/Icons";
 import { incomingRequests, driverToday, fmt } from "@/lib/data";
+
+const LiveMap = dynamic(() => import("@/components/LiveMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full w-full items-center justify-center bg-page text-faint">
+      <Loader2 size={18} className="animate-spin" />
+    </div>
+  ),
+});
 
 export default function DriverHome() {
   const { openDrawer } = useMode();
+  const { city } = useCity();
   const [online, setOnline] = useState(driverToday.online);
-  const strikesLeft = driverToday.cancellationLimit - driverToday.cancellationsThisWeek;
   const pendingCount = incomingRequests.length;
 
   return (
@@ -65,6 +76,19 @@ export default function DriverHome() {
         </button>
       </Card>
 
+      <div className="relative mt-3 h-[150px] overflow-hidden rounded-2xl border border-line">
+        <LiveMap
+          className="h-full w-full"
+          center={city.center}
+          zoom={14}
+          interactive={false}
+          markers={[{ position: city.center, kind: "vehicle" }]}
+        />
+        <span className="pointer-events-none absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[12px] font-semibold shadow-sm">
+          <Navigation size={12} className="text-brand" /> Your Location
+        </span>
+      </div>
+
       <div className="mt-3 grid grid-cols-3 gap-2.5">
         <Card className="px-3 py-3 text-center">
           <div className="text-[16px] font-bold">{fmt(driverToday.earningsToday)}</div>
@@ -97,7 +121,7 @@ export default function DriverHome() {
           <span className="block text-[15px] font-bold">Ride Requests</span>
           <span className={`block text-[12.5px] ${online ? "text-white/80" : "text-sub"}`}>
             {online
-              ? `${pendingCount} nearby — bid like an auction`
+              ? `${pendingCount} nearby, bid like an auction`
               : "Go online to see live requests"}
           </span>
         </span>
@@ -109,30 +133,13 @@ export default function DriverHome() {
         <ChevronRight size={18} className={online ? "text-white/70" : "text-faint"} />
       </Link>
 
-      {driverToday.cancellationsThisWeek > 0 && (
-        <Link
-          href="/help"
-          className="mt-3 flex items-center gap-3 rounded-2xl border border-warn/25 bg-warn-soft px-4 py-3"
-        >
-          <Flag size={16} className="shrink-0 text-warn" />
-          <span className="flex-1 text-[12.5px] leading-snug text-ink">
-            <span className="font-semibold">
-              {driverToday.cancellationsThisWeek} of {driverToday.cancellationLimit}
-            </span>{" "}
-            cancellation strikes this week — only cancellations our fraud checks
-            flag as suspicious count. {strikesLeft} more pauses your account;
-            contact support if this looks wrong.
-          </span>
-        </Link>
-      )}
-
       <Card className="mt-5 flex items-center gap-3 px-4 py-3.5">
         <span className="flex-1">
           <span className="block text-[13.5px] font-semibold">
             Peak hours right now
           </span>
           <span className="block text-[12px] text-sub">
-            Demand is up in Avondale &amp; Borrowdale — stay online for more
+            Demand is up in Avondale &amp; Borrowdale. Stay online for more
             requests.
           </span>
         </span>

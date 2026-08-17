@@ -17,7 +17,7 @@ export default function InsuranceStep() {
       />
       <div className="px-4 pb-8">
         <p className="text-[13.5px] text-sub">
-          Every FastGo partner is covered by Motions Legal Aid Cover — legal
+          Every FastGo partner is covered by Motions Legal Aid Cover: legal
           aid and comprehensive cover from day one.
         </p>
 

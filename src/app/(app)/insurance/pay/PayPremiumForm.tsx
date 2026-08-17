@@ -108,7 +108,7 @@ export default function PayPremiumForm() {
         </button>
       )}
       <p className="mt-3 text-center text-[12px] text-faint">
-        Missed premiums pause your Legal Aid Cover — pay on time to stay covered.
+        Missed premiums pause your Legal Aid Cover. Pay on time to stay covered.
       </p>
     </div>
   );

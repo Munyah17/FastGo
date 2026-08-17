@@ -18,7 +18,7 @@ export default function SafetyPage() {
             </span>
           </span>
           <button
-            aria-label="SOS — send emergency alert"
+            aria-label="SOS: send emergency alert"
             className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-bad text-[15px] font-extrabold text-white shadow-lg shadow-bad/30 ring-4 ring-bad/20"
           >
             SOS

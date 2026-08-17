@@ -11,7 +11,7 @@ export default function CompliancePage() {
     <div>
       <PageHeader
         title="Fleet Compliance"
-        subtitle="Compliance is enforced automatically — expired documents pause matching without manual intervention"
+        subtitle="Compliance is enforced automatically: expired documents pause matching without manual intervention"
       />
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">

@@ -30,7 +30,7 @@ export default function DriverPaymentSettingsPage() {
             <span className="flex-1">
               <span className="block text-[14px] font-medium">All Methods</span>
               <span className="block text-[12px] text-sub">
-                Cash, wallet, EcoCash, cards — widest matching pool
+                Cash, wallet, EcoCash, cards: widest matching pool
               </span>
             </span>
             <span
@@ -54,7 +54,7 @@ export default function DriverPaymentSettingsPage() {
             <span className="flex-1">
               <span className="block text-[14px] font-medium">Wallet Only</span>
               <span className="block text-[12px] text-sub">
-                No cash — zero fee-collection risk, fewer matches
+                No cash: zero fee-collection risk, fewer matches
               </span>
             </span>
             <span

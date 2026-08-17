@@ -164,5 +164,14 @@ export const ListIcon = (p: IconProps) =>
 export const Lock = (p: IconProps) =>
   base(p, <><rect x="4" y="10.5" width="16" height="10.5" rx="2" /><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" /></>);
 
+export const QrCode = (p: IconProps) =>
+  base(p, <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><line x1="14" y1="14" x2="14" y2="14.01" /><line x1="18" y1="14" x2="18" y2="17" /><line x1="14" y1="18" x2="17" y2="18" /><line x1="18" y1="21" x2="21" y2="21" /><line x1="21" y1="14" x2="21" y2="18" /></>);
+
+export const Camera = (p: IconProps) =>
+  base(p, <><path d="M4 8a2 2 0 0 1 2-2h1.2l1-1.6A2 2 0 0 1 9.9 3.5h4.2a2 2 0 0 1 1.7.9l1 1.6H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Z" /><circle cx="12" cy="13" r="3.5" /></>);
+
+export const HandCoins = (p: IconProps) =>
+  base(p, <><circle cx="8" cy="8" r="3.5" /><path d="M8 6v4M6.5 7.2h3" /><path d="M2.5 19.5 6 17.8a2.5 2.5 0 0 1 1.6-.2l3.6.8a1.6 1.6 0 0 0 1.7-.6l3.2-4.1a1.4 1.4 0 0 0-2.2-1.7l-2.4 2.7" /><path d="M8.9 17.4 13 16a1.6 1.6 0 0 1 1.9.7l.5.8 4.9-3.2a1.3 1.3 0 0 1 1.7 1.9l-5.6 5.4a3 3 0 0 1-2.6.8l-4.7-.9" /></>);
+
 export const EyeOff = (p: IconProps) =>
   base(p, <><path d="M17.94 17.94A10.4 10.4 0 0 1 12 19c-6.5 0-10-7-10-7a17.6 17.6 0 0 1 4.1-4.9" /><path d="M9.9 5.2A9.4 9.4 0 0 1 12 5c6.5 0 10 7 10 7a17.7 17.7 0 0 1-2.2 3.1" /><line x1="2" y1="2" x2="22" y2="22" /></>);

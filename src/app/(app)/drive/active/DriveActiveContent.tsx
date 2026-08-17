@@ -144,7 +144,7 @@ export default function DriveActiveContent() {
               We compare your GPS trail against the declared drop-off. If the
               actual endpoint is more than 100m away, the fare is
               automatically adjusted and charged to the passenger&apos;s
-              wallet — no manual review needed.
+              wallet, with no manual review needed.
             </p>
             <button
               onClick={() => {
@@ -190,7 +190,7 @@ export default function DriveActiveContent() {
             </span>
             <h1 className="mt-4 text-[19px] font-bold">Not Eligible</h1>
             <p className="mt-1 text-[13.5px] text-sub">
-              Your GPS trail ended within 100m of the declared drop-off —
+              Your GPS trail ended within 100m of the declared drop-off, so
               this doesn&apos;t qualify for an adjustment.
             </p>
             <button
@@ -220,7 +220,7 @@ export default function DriveActiveContent() {
         </header>
         <div className="px-4 pb-8">
           <p className="text-[13px] text-sub">
-            Every cancellation is reviewed automatically — GPS and trip data
+            Every cancellation is reviewed automatically. GPS and trip data
             confirm whether it&apos;s genuine, so honest cancellations never
             count against you.
           </p>
@@ -367,7 +367,7 @@ export default function DriveActiveContent() {
                 </span>
                 <span className="block text-[12px] text-sub">
                   {waitingFee > 0
-                    ? `Free wait used — ${fmt(waitingFee)} waiting fee accruing`
+                    ? `Free wait used, ${fmt(waitingFee)} waiting fee accruing`
                     : `${FREE_WAIT_MINUTES} min free, then a small waiting fee applies`}
                 </span>
               </span>

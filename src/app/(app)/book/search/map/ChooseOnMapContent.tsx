@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ScreenHeader } from "@/components/ui";
+import { useCity } from "@/lib/CityContext";
 import { MapPin, Loader2 } from "@/components/Icons";
 
 const LiveMap = dynamic(() => import("@/components/LiveMap"), {
@@ -15,14 +16,13 @@ const LiveMap = dynamic(() => import("@/components/LiveMap"), {
   ),
 });
 
-const HARARE: [number, number] = [-17.8252, 31.0335];
-
 export default function ChooseOnMapContent() {
   const router = useRouter();
   const params = useSearchParams();
   const field = params.get("field") === "from" ? "from" : "to";
+  const { city } = useCity();
 
-  const [center, setCenter] = useState<[number, number]>(HARARE);
+  const [center, setCenter] = useState<[number, number]>(city.center);
   const [address, setAddress] = useState<{ name: string; address: string } | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -51,7 +51,7 @@ export default function ChooseOnMapContent() {
       <div className="relative h-[52vh] min-h-[340px]">
         <LiveMap
           className="h-full w-full"
-          center={HARARE}
+          center={city.center}
           zoom={16}
           onCenterChange={(lat, lon) => setCenter([lat, lon])}
         />

@@ -9,6 +9,7 @@ import { user } from "@/lib/data";
 import {
   Car,
   Wallet,
+  QrCode,
   Bell,
   Shield,
   Gear,
@@ -22,6 +23,7 @@ import {
 const menuItems = [
   { href: "/trips", label: "Trip History", icon: Car },
   { href: "/wallet", label: "Wallet", icon: Wallet },
+  { href: "/wallet/scan-to-pay", label: "Scan to Pay", icon: QrCode },
   { href: "/notifications", label: "Notifications", icon: Bell },
   { href: "/safety", label: "Safety Center", icon: Shield },
   { href: "/refer", label: "Refer & Earn", icon: Users },

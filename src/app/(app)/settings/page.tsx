@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ScreenHeader, Card, ListRow, Divider } from "@/components/ui";
 import Avatar from "@/components/Avatar";
 import {
@@ -10,8 +11,9 @@ import {
   Doc,
   ShieldCheck,
   Wallet,
+  Flag,
 } from "@/components/Icons";
-import { user } from "@/lib/data";
+import { user, driverToday } from "@/lib/data";
 
 export default function SettingsPage() {
   return (
@@ -63,9 +65,27 @@ export default function SettingsPage() {
             href="/settings/payments"
             icon={<Wallet size={17} />}
             title="Payments You Accept"
-            subtitle="As a driver — all methods or wallet only"
+            subtitle="As a driver: all methods or wallet only"
           />
         </Card>
+
+        {driverToday.cancellationsThisWeek > 0 && (
+          <Link
+            href="/help"
+            className="mt-3.5 flex items-center gap-3 rounded-2xl border border-warn/25 bg-warn-soft px-4 py-3"
+          >
+            <Flag size={16} className="shrink-0 text-warn" />
+            <span className="flex-1 text-[12.5px] leading-snug text-ink">
+              <span className="font-semibold">
+                {driverToday.cancellationsThisWeek} of {driverToday.cancellationLimit}
+              </span>{" "}
+              cancellation strikes this week. Only cancellations our fraud
+              checks flag as suspicious count.{" "}
+              {driverToday.cancellationLimit - driverToday.cancellationsThisWeek} more
+              pauses your account. Contact support if this looks wrong.
+            </span>
+          </Link>
+        )}
 
         <Card className="mt-3.5">
           <ListRow

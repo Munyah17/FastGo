@@ -14,7 +14,7 @@ export default function PersonalInfoStep() {
       <div className="px-4 pb-8">
         <p className="text-[13.5px] text-sub">
           Tell us who you are. This is used to verify your identity, not to
-          make you a FastGo employee — you remain an independent partner.
+          make you a FastGo employee. You remain an independent partner.
         </p>
 
         <div className="mt-5 space-y-4">

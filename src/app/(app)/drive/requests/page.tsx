@@ -44,7 +44,7 @@ export default function DriveRequestsPage() {
       <ScreenHeader title="Ride Requests" back="/" />
       <div className="px-4 pb-6">
         <p className="mb-3 text-[13px] text-sub">
-          Bid the offered fare, counter with your own, or ignore — the
+          Bid the offered fare, counter with your own, or ignore. The
           passenger picks which driver gets the trip, just like an auction.
         </p>
 
@@ -88,11 +88,11 @@ export default function DriveRequestsPage() {
                     onClick={() => goToTrip(r)}
                     className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-good py-2.5 text-[13px] font-bold text-white"
                   >
-                    <CheckCircle size={16} /> Passenger confirmed you — start trip
+                    <CheckCircle size={16} /> Passenger confirmed you, start trip
                   </button>
                 ) : state === "bidding" ? (
                   <div className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-brand-soft px-3 py-2.5 text-[13px] font-semibold text-brand">
-                    <Clock size={15} /> Bid sent — waiting for passenger to choose a driver…
+                    <Clock size={15} /> Bid sent. Waiting for passenger to choose a driver…
                   </div>
                 ) : state === "countering" ? (
                   <div className="mt-3 flex items-center gap-2">

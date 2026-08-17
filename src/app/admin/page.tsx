@@ -36,7 +36,7 @@ export default function AdminOverviewPage() {
       <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-3">
         <Panel className="p-5 lg:col-span-2">
           <div className="flex items-center justify-between">
-            <h2 className="text-[15px] font-semibold">GMV & Platform Revenue — 7 days</h2>
+            <h2 className="text-[15px] font-semibold">GMV & Platform Revenue: 7 days</h2>
           </div>
           <div className="mt-4 flex h-40 items-end gap-3">
             {revenueTrend.map((d) => (

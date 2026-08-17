@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Search, MapPin, Navigation, Loader2 } from "@/components/Icons";
+import { useCity } from "@/lib/CityContext";
 import { savedPlaces } from "@/lib/data";
 import type { PlaceResult } from "@/app/api/places/search/route";
 
@@ -11,6 +12,7 @@ type Field = "from" | "to";
 
 export default function SearchFlow() {
   const router = useRouter();
+  const { city } = useCity();
   const [from, setFrom] = useState("My Location");
   const [to, setTo] = useState("");
   const [active, setActive] = useState<Field>("to");
@@ -33,7 +35,9 @@ export default function SearchFlow() {
     setLoading(true);
     const t = setTimeout(async () => {
       try {
-        const res = await fetch(`/api/places/search?q=${encodeURIComponent(q)}`);
+        const res = await fetch(
+          `/api/places/search?q=${encodeURIComponent(q)}&lat=${city.center[0]}&lon=${city.center[1]}`
+        );
         const data = await res.json();
         setResults(data.results ?? []);
       } catch {
@@ -172,7 +176,7 @@ export default function SearchFlow() {
           ))}
           {!loading && results.length === 0 && query.trim().length >= 2 && (
             <div className="px-4 py-6 text-center text-[13px] text-faint">
-              No live matches — try a different search.
+              No live matches. Try a different search.
             </div>
           )}
           {query.trim().length < 2 && (

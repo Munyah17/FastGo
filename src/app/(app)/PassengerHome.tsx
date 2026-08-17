@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import MapMock from "@/components/MapMock";
+import dynamic from "next/dynamic";
 import FareOfferBar from "./FareOfferBar";
+import CityDetector from "@/components/CityDetector";
 import { useMode } from "@/lib/ModeContext";
+import { useCity } from "@/lib/CityContext";
+import type { MapMarker } from "@/components/LiveMap";
 import {
   Menu,
   Bell,
@@ -15,8 +18,18 @@ import {
   Car,
   Star,
   Briefcase,
+  Loader2,
 } from "@/components/Icons";
 import { savedPlaces } from "@/lib/data";
+
+const LiveMap = dynamic(() => import("@/components/LiveMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full w-full items-center justify-center bg-page text-faint">
+      <Loader2 size={22} className="animate-spin" />
+    </div>
+  ),
+});
 
 const categories = [
   { label: "Ride", icon: Car, active: true },
@@ -25,12 +38,35 @@ const categories = [
   { label: "Delivery", icon: Briefcase, active: false },
 ];
 
+// Deterministic offsets (~0.6-1.8km) so nearby driver markers look
+// plausible around whichever city is active, without needing live GPS.
+const VEHICLE_OFFSETS: [number, number][] = [
+  [0.007, -0.011],
+  [-0.012, 0.006],
+  [0.004, 0.014],
+  [-0.009, -0.008],
+  [0.013, 0.003],
+];
+
 export default function PassengerHome() {
   const { openDrawer } = useMode();
+  const { city } = useCity();
+
+  const vehicleMarkers: MapMarker[] = VEHICLE_OFFSETS.map(([dLat, dLon]) => ({
+    position: [city.center[0] + dLat, city.center[1] + dLon],
+    kind: "vehicle",
+  }));
+
   return (
     <div>
       <div className="relative h-[54vh] min-h-[360px] overflow-hidden">
-        <MapMock className="h-full" />
+        <LiveMap
+          className="h-full w-full"
+          center={city.center}
+          zoom={13}
+          interactive={false}
+          markers={vehicleMarkers}
+        />
 
         <div className="absolute inset-x-4 top-4 flex items-center justify-between gap-2">
           <button
@@ -50,7 +86,9 @@ export default function PassengerHome() {
           </Link>
         </div>
 
-        <div className="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-full">
+        <CityDetector />
+
+        <div className="pointer-events-none absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-full">
           <span className="relative block whitespace-nowrap rounded-full bg-brand px-4 py-2 text-[13.5px] font-semibold text-white shadow-lg">
             My Location
             <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-8 border-t-8 border-x-transparent border-t-brand" />
@@ -106,7 +144,7 @@ export default function PassengerHome() {
           <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-good" />
           <span className="flex-1 text-[14px] font-semibold">My Location</span>
           <span className="shrink-0 rounded-full bg-page px-2.5 py-1 text-[11px] font-semibold text-sub">
-            Current
+            {city.name}
           </span>
         </div>
 

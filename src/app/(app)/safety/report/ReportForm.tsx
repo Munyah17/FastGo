@@ -67,7 +67,7 @@ export default function ReportForm() {
       </div>
       <Card className="px-4 py-3">
         <div className="text-[13.5px] font-medium">
-          FG-88214 — Sam Levy&apos;s Village
+          FG-88214 • Sam Levy&apos;s Village
         </div>
         <div className="text-[12px] text-sub">Today, 08:42 • Blessing M.</div>
       </Card>
@@ -91,7 +91,7 @@ export default function ReportForm() {
         Submit Report
       </button>
       <p className="mt-3 text-center text-[12px] text-faint">
-        In an emergency, use the SOS button — it alerts your contacts and our
+        In an emergency, use the SOS button. It alerts your contacts and our
         24/7 safety line immediately.
       </p>
     </div>

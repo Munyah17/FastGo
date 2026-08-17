@@ -16,14 +16,14 @@ export default function PassengerVerifyStep() {
           <ShieldCheck size={20} className="shrink-0 text-brand" />
           <p className="text-[12.5px] leading-snug text-ink">
             Every rider and every partner is verified before they can request
-            or accept a trip — it keeps both sides of the platform safe.
+            or accept a trip. It keeps both sides of the platform safe.
           </p>
         </div>
 
         <div className="mt-5 space-y-4">
           <div>
             <label className="text-[13px] font-semibold text-sub">
-              National ID — Front
+              National ID: Front
             </label>
             <button className="mt-1.5 flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-line bg-white py-6 text-[13.5px] font-semibold text-sub">
               <Upload size={17} /> Upload front of ID
@@ -31,7 +31,7 @@ export default function PassengerVerifyStep() {
           </div>
           <div>
             <label className="text-[13px] font-semibold text-sub">
-              National ID — Back
+              National ID: Back
             </label>
             <button className="mt-1.5 flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-line bg-white py-6 text-[13.5px] font-semibold text-sub">
               <Upload size={17} /> Upload back of ID

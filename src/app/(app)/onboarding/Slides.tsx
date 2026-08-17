@@ -13,7 +13,7 @@ const slides = [
   {
     icon: ShieldCheck,
     title: "Safety first, always",
-    body: "Verified drivers, live trip sharing, PIN verification and a 24/7 SOS line — on every single trip.",
+    body: "Verified drivers, live trip sharing, PIN verification and a 24/7 SOS line, on every single trip.",
   },
   {
     icon: Wallet,

@@ -13,8 +13,8 @@ export default function PassengerPersonalStep() {
       />
       <div className="px-4 pb-8">
         <p className="text-[13.5px] text-sub">
-          Passengers go through the same identity verification as partners —
-          this protects drivers too, not just riders.
+          Passengers go through the same identity verification as partners.
+          This protects drivers too, not just riders.
         </p>
 
         <div className="mt-5 space-y-4">

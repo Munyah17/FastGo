@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "FastGo — Zimbabwe's Mobility Platform",
+  title: "FastGo: Zimbabwe's Mobility Platform",
   description:
     "FastGo is a Zimbabwe-first ride-hailing and mobility platform connecting passengers with verified, compliant drivers.",
 };

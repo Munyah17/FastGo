@@ -15,11 +15,13 @@ export const MAX_EXTRA_PASSENGERS = 3;
 export const waitingDisputeReasons = [
   "Driver wasn't actually at the pickup point",
   "Driver arrived early and started the timer unfairly",
-  "I was already waiting — this is inaccurate",
+  "I was already waiting when this was logged",
   "Other",
 ];
 
 export const user = {
+  id: "usr_tawanda_m",
+  phone: "+263771234567",
   name: "Tawanda M.",
   firstName: "Tawanda",
   avatarUrl: null as string | null,
@@ -30,6 +32,26 @@ export const user = {
   walletBalance: 18.45,
   memberSinceMonths: 26,
 };
+
+// Matches supabase/migrations/0022_scan_to_pay_cashback.sql — give_cashback()
+// retains this fraction as the driver's handling fee, the rest goes to the
+// passenger. Driver-initiated only; never something a passenger can compel.
+export const CASHBACK_FEE_RATE = 0.05;
+
+// Other FastGo users a Scan to Pay QR code or manual lookup can resolve to.
+// Stand-in for a real recipient lookup by id/phone in production.
+export const scanToPayContacts: {
+  id: string;
+  name: string;
+  phone: string;
+  role: "passenger" | "driver";
+  avatarUrl: string | null;
+}[] = [
+  { id: "usr_blessing_m", name: "Blessing M.", phone: "+263772234567", role: "driver", avatarUrl: null },
+  { id: "usr_rudo_c", name: "Rudo C.", phone: "+263773345678", role: "passenger", avatarUrl: null },
+  { id: "usr_tinashe_k", name: "Tinashe K.", phone: "+263774456789", role: "driver", avatarUrl: null },
+  { id: "usr_farai_n", name: "Farai N.", phone: "+263775567890", role: "passenger", avatarUrl: null },
+];
 
 export const savedPlaces = [
   { label: "Home", address: "123 Samora Machel Ave, Harare", icon: "home" },
@@ -153,7 +175,7 @@ export const helpTopics = [
 export const messages = [
   {
     from: "FastGo Support",
-    preview: "Your document review is complete — all valid.",
+    preview: "Your document review is complete, all valid.",
     time: "09:12",
     unread: true,
   },
@@ -263,7 +285,7 @@ export const notifications = [
   },
   {
     title: "Trip Completed",
-    body: "Sam Levy's Village — you earned US$8.40.",
+    body: "Sam Levy's Village. You earned US$8.40.",
     time: "35m ago",
     tone: "good",
     category: "Trips",
@@ -302,7 +324,7 @@ export const faqs = [
   },
   {
     q: "How is my fare calculated?",
-    a: "Fares combine a base fare, distance and time, with a minimum fare. You always see the price before you confirm — no surprises.",
+    a: "Fares combine a base fare, distance and time, with a minimum fare. You always see the price before you confirm, with no surprises.",
   },
   {
     q: "Can I pay cash?",

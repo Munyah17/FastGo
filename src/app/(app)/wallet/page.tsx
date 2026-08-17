@@ -11,6 +11,7 @@ import {
   Doc,
   Trophy,
   Wallet as WalletIcon,
+  QrCode,
 } from "@/components/Icons";
 import { user, todayEarnings, fmt } from "@/lib/data";
 
@@ -42,18 +43,19 @@ export default function WalletPage() {
       </div>
 
       <div className="-mt-9 px-4">
-        <Card className="flex justify-around px-2 py-3.5 shadow-sm">
+        <Card className="grid grid-cols-4 gap-1 px-2 py-3.5 shadow-sm">
           {(
             [
               { label: "Top Up", icon: Upload, href: "/wallet/topup" },
-              { label: "Transactions", icon: CreditCard, href: "/wallet/transactions" },
+              { label: "Scan Pay", icon: QrCode, href: "/wallet/scan-to-pay" },
+              { label: "History", icon: CreditCard, href: "/wallet/transactions" },
               { label: "Withdraw", icon: Download, href: "/wallet/withdraw" },
             ] as { label: string; icon: ComponentType<{ size?: number }>; href: string }[]
           ).map(({ label, icon: Icon, href }) => (
             <Link
               key={label}
               href={href}
-              className="flex flex-col items-center gap-1.5 text-[12px] font-medium text-sub"
+              className="flex flex-col items-center gap-1.5 text-[11.5px] font-medium text-sub"
             >
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft text-brand">
                 <Icon size={18} />

@@ -143,7 +143,7 @@ export const complianceEvents: Record<
     { type: "document_expiring", detail: "Roadworthy Certificate expires in 16 days", time: "Today, 03:00" },
   ],
   "p-1003": [
-    { type: "partner_suspended", detail: "Suspended — Legal Aid Cover expired", time: "02 Mar 2025, 03:00" },
+    { type: "partner_suspended", detail: "Suspended: Legal Aid Cover expired", time: "02 Mar 2025, 03:00" },
     { type: "manual_review", detail: "Low rating flagged for review (2 stars)", time: "18 Feb 2025, 19:44" },
     { type: "document_expired", detail: "Driver's License expired", time: "03 Feb 2025, 03:00" },
   ],

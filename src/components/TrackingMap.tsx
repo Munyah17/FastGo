@@ -60,11 +60,20 @@ export default function TrackingMap({
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all([geocode(pickupAddress), geocode(dropoffAddress)]).then(([p, d]) => {
+    // Sequential, not Promise.all — Nominatim's usage policy is ~1 req/sec
+    // with no concurrent requests; firing pickup+dropoff geocoding at once
+    // routinely got one of them silently rejected, falling back to the
+    // Harare default and putting a pin in the wrong place.
+    (async () => {
+      const p = await geocode(pickupAddress);
       if (cancelled) return;
       setPickup(p);
+      await new Promise((r) => setTimeout(r, 400));
+      if (cancelled) return;
+      const d = await geocode(dropoffAddress);
+      if (cancelled) return;
       setDropoff(d);
-    });
+    })();
     return () => {
       cancelled = true;
     };

@@ -47,7 +47,7 @@ export default function RideTrackingMap({
         <h2 className="text-[15px] font-bold">Dispute This Arrival</h2>
         <p className="mt-1 text-[13px] text-sub">
           If your driver marked arrival before actually being at the pickup
-          point, the waiting fee is waived — this is reviewed automatically.
+          point, the waiting fee is waived immediately.
         </p>
         <div className="mt-3 space-y-2">
           {waitingDisputeReasons.map((r) => (
@@ -153,9 +153,9 @@ export default function RideTrackingMap({
                 <span className="block text-[13.5px] font-bold">Your driver has arrived</span>
                 <span className="block text-[12px] text-sub">
                   {disputed
-                    ? "Dispute submitted — waiting fee waived"
+                    ? "Dispute submitted, waiting fee waived"
                     : waitingFee > 0
-                      ? `${fmt(waitingFee)} waiting fee — free wait time used`
+                      ? `${fmt(waitingFee)} waiting fee, free wait time used`
                       : `${FREE_WAIT_MINUTES} min free wait`}
                 </span>
               </span>

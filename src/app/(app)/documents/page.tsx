@@ -48,7 +48,7 @@ export default function DocumentsPage() {
         </button>
 
         <p className="mt-3 text-center text-[12px] leading-relaxed text-faint">
-          Expired documents automatically pause trip requests until renewed —
+          Expired documents automatically pause trip requests until renewed,
           keeping you compliant with national and council requirements.
         </p>
       </div>

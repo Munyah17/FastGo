@@ -37,7 +37,7 @@ export default function PassengerVerificationPage() {
       <ScreenHeader title="Rider Verification" back="/profile" />
       <div className="px-4 pb-8">
         <p className="text-[13px] text-sub">
-          Riders go through the same identity checks as partners — it&apos;s
+          Riders go through the same identity checks as partners. It&apos;s
           how FastGo keeps drivers safe from fraudulent bookings too.
         </p>
 

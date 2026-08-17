@@ -38,7 +38,7 @@ export default function RateTrip() {
             {stars === 5
               ? "Excellent! Blessing will appreciate that."
               : stars >= 4
-                ? "Great — thanks for the feedback."
+                ? "Great, thanks for the feedback."
                 : "Sorry to hear that. We'll follow up."}
           </p>
         )}

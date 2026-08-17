@@ -56,7 +56,7 @@ export default function VehicleInfoStep() {
         <div className="mt-4 flex items-center gap-2 text-brand">
           <ShieldCheck size={16} />
           <span className="text-[12.5px] font-semibold">
-            Your vehicle stays registered to you — never to FastGo.
+            Your vehicle stays registered to you, never to FastGo.
           </span>
         </div>
 
