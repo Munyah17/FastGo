@@ -68,7 +68,7 @@ export default function PassengerHome() {
           markers={vehicleMarkers}
         />
 
-        <div className="absolute inset-x-4 top-4 flex items-center justify-between gap-2">
+        <div className="absolute inset-x-4 top-4 z-20 flex items-center justify-between gap-2">
           <button
             onClick={openDrawer}
             aria-label="Menu"
@@ -88,7 +88,7 @@ export default function PassengerHome() {
 
         <CityDetector />
 
-        <div className="pointer-events-none absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-full">
+        <div className="pointer-events-none absolute left-1/2 top-[42%] z-10 -translate-x-1/2 -translate-y-full">
           <span className="relative block whitespace-nowrap rounded-full bg-brand px-4 py-2 text-[13.5px] font-semibold text-white shadow-lg">
             My Location
             <span className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-8 border-t-8 border-x-transparent border-t-brand" />
@@ -97,14 +97,14 @@ export default function PassengerHome() {
 
         <button
           aria-label="Recenter map"
-          className="absolute bottom-[76px] right-4 flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand shadow-lg"
+          className="absolute bottom-[76px] right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand shadow-lg"
         >
           <Navigation size={19} />
         </button>
 
         <Link
           href="/help/faqs"
-          className="absolute inset-x-3 bottom-3 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lg"
+          className="absolute inset-x-3 bottom-3 z-10 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lg"
         >
           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand">
             <Question size={16} />

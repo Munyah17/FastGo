@@ -74,7 +74,7 @@ export default function LiveMap({
   recenterKey?: string;
 }) {
   return (
-    <div className={className}>
+    <div className={`${className} isolate relative z-0`}>
       <MapContainer
         center={center}
         zoom={zoom}

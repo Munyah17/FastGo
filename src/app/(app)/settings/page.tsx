@@ -13,7 +13,7 @@ import {
   Wallet,
   Flag,
 } from "@/components/Icons";
-import { user, driverToday } from "@/lib/data";
+import { user, driverToday, fmt } from "@/lib/data";
 
 export default function SettingsPage() {
   return (
@@ -31,6 +31,24 @@ export default function SettingsPage() {
           <button className="rounded-lg bg-brand-soft px-3 py-1.5 text-[12.5px] font-semibold text-brand">
             Edit
           </button>
+        </Card>
+
+        <div className="mb-2 mt-3.5 text-[13px] font-semibold text-sub">
+          Today&apos;s Activity
+        </div>
+        <Card className="flex divide-x divide-line py-3.5 text-center">
+          <div className="flex-1">
+            <div className="text-[15.5px] font-bold">{fmt(driverToday.earningsToday)}</div>
+            <div className="text-[11.5px] text-sub">Today</div>
+          </div>
+          <div className="flex-1">
+            <div className="text-[15.5px] font-bold">{driverToday.tripsToday}</div>
+            <div className="text-[11.5px] text-sub">Trips</div>
+          </div>
+          <div className="flex-1">
+            <div className="text-[15.5px] font-bold">{driverToday.hoursOnline}</div>
+            <div className="text-[11.5px] text-sub">Online</div>
+          </div>
         </Card>
 
         <Card className="mt-3.5">

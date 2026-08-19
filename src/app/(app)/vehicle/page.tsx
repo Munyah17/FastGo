@@ -1,8 +1,10 @@
 import { ScreenHeader, Card, Divider, Badge } from "@/components/ui";
 import { Doc, Plus } from "@/components/Icons";
-import { vehicle, vehicleDocuments } from "@/lib/data";
+import { vehicle, vehicleDocuments, vehicleDesignations } from "@/lib/data";
 
 export default function VehiclePage() {
+  const designation = vehicleDesignations.find((d) => d.id === vehicle.designation);
+
   return (
     <div>
       <ScreenHeader title="My Vehicle" back="/profile" />
@@ -20,6 +22,17 @@ export default function VehiclePage() {
             </span>
             <Badge tone="good">{vehicle.status}</Badge>
           </div>
+
+          {designation && (
+            <div className="mx-4 mt-3 flex items-center gap-2 rounded-xl bg-brand-soft px-3 py-2">
+              <span className="text-[12.5px] font-semibold text-brand">
+                {designation.label}
+              </span>
+              <span className="text-[11.5px] text-brand/80">
+                {designation.seats > 0 ? `${designation.seats} seats` : "Parcels only"}
+              </span>
+            </div>
+          )}
 
           <div className="mt-3 flex h-28 items-center justify-center bg-page">
             <svg viewBox="0 0 140 70" className="h-20 w-40" aria-hidden="true">

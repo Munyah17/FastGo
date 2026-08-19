@@ -2,18 +2,30 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Car, Info, Wallet, ChevronRight } from "@/components/Icons";
+import { Car, Briefcase, Bike, Info, Wallet, ChevronRight } from "@/components/Icons";
 import { Card } from "@/components/ui";
 import { rideOptions, user, fmt } from "@/lib/data";
 
+const optionIcons = {
+  ordinary: Car,
+  four_seater: Car,
+  seven_seater: Car,
+  comfort: Car,
+  luxury: Car,
+  exclusive: Car,
+  delivery: Briefcase,
+  bike: Bike,
+} as const;
+
 export default function RideOptions() {
-  const [selected, setSelected] = useState("lite");
+  const [selected, setSelected] = useState("ordinary");
 
   return (
     <div className="px-4 pb-6">
       <div className="mt-3 space-y-2.5">
         {rideOptions.map((opt) => {
           const active = opt.id === selected;
+          const Icon = optionIcons[opt.id as keyof typeof optionIcons];
           return (
             <button
               key={opt.id}
@@ -23,13 +35,16 @@ export default function RideOptions() {
               }`}
             >
               <span className="flex h-10 w-14 items-center justify-center rounded-xl bg-page text-sub">
-                <Car size={26} />
+                <Icon size={24} />
               </span>
               <span className="flex-1">
                 <span className="block text-[14.5px] font-semibold">
                   {opt.name}
                 </span>
-                <span className="block text-[12.5px] text-sub">{opt.eta}</span>
+                <span className="block text-[12.5px] text-sub">
+                  {opt.eta}
+                  {opt.seats > 0 ? ` • ${opt.seats} seats` : " • Parcels only"}
+                </span>
               </span>
               <span className="text-[15px] font-bold">{fmt(opt.price)}</span>
               <Info size={15} className="text-faint" />

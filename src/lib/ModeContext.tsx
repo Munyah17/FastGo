@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { driverToday } from "@/lib/data";
 
 export type AppMode = "passenger" | "driver";
 
@@ -10,6 +11,8 @@ const ModeContext = createContext<{
   drawerOpen: boolean;
   openDrawer: () => void;
   closeDrawer: () => void;
+  online: boolean;
+  setOnline: (v: boolean) => void;
 } | null>(null);
 
 const STORAGE_KEY = "fastgo-mode";
@@ -17,6 +20,10 @@ const STORAGE_KEY = "fastgo-mode";
 export function ModeProvider({ children }: { children: React.ReactNode }) {
   const [mode, setModeState] = useState<AppMode>("passenger");
   const [drawerOpen, setDrawerOpen] = useState(false);
+  // Driver's go-online/offline status — lives here (not in DriverHome) so
+  // the retractable sidebar's toggle and the home tab stay in sync without
+  // the home tab needing to render any online/offline UI of its own.
+  const [online, setOnline] = useState(driverToday.online);
 
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
@@ -36,6 +43,8 @@ export function ModeProvider({ children }: { children: React.ReactNode }) {
         drawerOpen,
         openDrawer: () => setDrawerOpen(true),
         closeDrawer: () => setDrawerOpen(false),
+        online,
+        setOnline,
       }}
     >
       {children}

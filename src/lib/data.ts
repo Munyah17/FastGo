@@ -59,10 +59,32 @@ export const savedPlaces = [
   { label: "Chitungwiza", address: "Chitungwiza CBD", icon: "pin" },
 ];
 
+// Matches vehicle_category enum in supabase/migrations/0023_vehicle_designations.sql.
+// This is the canonical vehicle taxonomy: what a partner's vehicle registers
+// as (see vehicle.designation below) and what a passenger picks in
+// RideOptions. Delivery and Bike carry parcels only, never passengers.
+export const vehicleDesignations = [
+  { id: "ordinary", label: "Ordinary", description: "Everyday ride, any compact or sedan.", seats: 4, isDelivery: false },
+  { id: "four_seater", label: "4 Seater", description: "Sedan or hatchback seating up to 4.", seats: 4, isDelivery: false },
+  { id: "seven_seater", label: "7 Seater", description: "SUV or minivan seating up to 7.", seats: 7, isDelivery: false },
+  { id: "comfort", label: "Comfort", description: "Newer, more spacious vehicle with extra legroom.", seats: 4, isDelivery: false },
+  { id: "luxury", label: "Luxury", description: "Premium vehicle for a top-tier ride.", seats: 4, isDelivery: false },
+  { id: "exclusive", label: "Exclusive", description: "FastGo's highest tier — top-rated partners, premium vehicles only.", seats: 4, isDelivery: false },
+  { id: "delivery", label: "Delivery", description: "Car or van for parcel and package delivery, no passengers.", seats: 0, isDelivery: true },
+  { id: "bike", label: "Bike", description: "Motorbike for fast parcel pickups and drop-offs.", seats: 0, isDelivery: true },
+] as const;
+
+export type VehicleDesignationId = (typeof vehicleDesignations)[number]["id"];
+
 export const rideOptions = [
-  { id: "lite", name: "FastGo Lite", eta: "4 min away", price: 3.2, seats: 4 },
-  { id: "plus", name: "FastGo Plus", eta: "6 min away", price: 4.5, seats: 4 },
-  { id: "xl", name: "FastGo XL", eta: "7 min away", price: 6.8, seats: 7 },
+  { id: "ordinary", name: "Ordinary", eta: "3 min away", price: 2.8, seats: 4 },
+  { id: "four_seater", name: "4 Seater", eta: "4 min away", price: 3.2, seats: 4 },
+  { id: "seven_seater", name: "7 Seater", eta: "6 min away", price: 4.8, seats: 7 },
+  { id: "comfort", name: "Comfort", eta: "5 min away", price: 4.5, seats: 4 },
+  { id: "luxury", name: "Luxury", eta: "8 min away", price: 7.5, seats: 4 },
+  { id: "exclusive", name: "Exclusive", eta: "10 min away", price: 11.0, seats: 4 },
+  { id: "delivery", name: "Delivery", eta: "6 min away", price: 3.5, seats: 0 },
+  { id: "bike", name: "Bike", eta: "3 min away", price: 2.0, seats: 0 },
 ];
 
 export const activeRide = {
@@ -81,6 +103,7 @@ export const vehicle = {
   colour: "Silver",
   plate: "AFD 1234",
   status: "Active",
+  designation: "four_seater" as VehicleDesignationId,
 };
 
 export const vehicleDocuments = [

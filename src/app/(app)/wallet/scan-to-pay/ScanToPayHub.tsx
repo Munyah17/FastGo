@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import QRCode from "qrcode";
 import { Card } from "@/components/ui";
 import Avatar from "@/components/Avatar";
-import { QrCode, Camera, Share, ChevronRight } from "@/components/Icons";
+import { QrCode, Camera, Share, ChevronRight, Loader2 } from "@/components/Icons";
 import { user, scanToPayContacts } from "@/lib/data";
 import { encodeScanToPayPayload, decodeScanToPayPayload } from "@/lib/scanToPay";
 
@@ -42,20 +42,28 @@ export default function ScanToPayHub() {
 
 function MyCodeTab() {
   const [dataUrl, setDataUrl] = useState<string | null>(null);
+  const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
+    setFailed(false);
     QRCode.toDataURL(encodeScanToPayPayload(user.id), {
       width: 260,
       margin: 1,
       color: { dark: "#0f172a", light: "#ffffff" },
-    }).then((url) => {
-      if (!cancelled) setDataUrl(url);
-    });
+    })
+      .then((url) => {
+        if (!cancelled) setDataUrl(url);
+      })
+      .catch((err) => {
+        console.error("Scan to Pay: failed to generate QR code", err);
+        if (!cancelled) setFailed(true);
+      });
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [attempt]);
 
   const share = async () => {
     if (navigator.share) {
@@ -76,9 +84,20 @@ function MyCodeTab() {
         {dataUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={dataUrl} alt="Your FastGo Scan to Pay code" width={220} height={220} className="rounded-xl" />
+        ) : failed ? (
+          <div className="flex h-[220px] w-[220px] flex-col items-center justify-center gap-2 rounded-xl bg-page px-6 text-center text-faint">
+            <QrCode size={32} />
+            <span className="text-[11.5px]">Couldn&apos;t generate your code.</span>
+            <button
+              onClick={() => setAttempt((n) => n + 1)}
+              className="rounded-lg bg-brand-soft px-3 py-1 text-[11.5px] font-semibold text-brand"
+            >
+              Try Again
+            </button>
+          </div>
         ) : (
           <div className="flex h-[220px] w-[220px] items-center justify-center rounded-xl bg-page text-faint">
-            <QrCode size={40} />
+            <Loader2 size={28} className="animate-spin" />
           </div>
         )}
         <div className="flex items-center gap-2.5">

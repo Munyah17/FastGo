@@ -116,7 +116,7 @@ export default function TrackingMap({
         route={route}
         recenterKey={`${position[0].toFixed(4)},${position[1].toFixed(4)}`}
       />
-      <div className="absolute inset-x-3 top-3 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lg">
+      <div className="absolute inset-x-3 top-3 z-10 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lg">
         {loading || pickup === null ? (
           <>
             <Loader2 size={17} className="shrink-0 animate-spin text-brand" />

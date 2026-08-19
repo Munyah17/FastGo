@@ -170,6 +170,9 @@ export const QrCode = (p: IconProps) =>
 export const Camera = (p: IconProps) =>
   base(p, <><path d="M4 8a2 2 0 0 1 2-2h1.2l1-1.6A2 2 0 0 1 9.9 3.5h4.2a2 2 0 0 1 1.7.9l1 1.6H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Z" /><circle cx="12" cy="13" r="3.5" /></>);
 
+export const Bike = (p: IconProps) =>
+  base(p, <><circle cx="5.5" cy="17.5" r="3.5" /><circle cx="18.5" cy="17.5" r="3.5" /><path d="M5.5 17.5 10 8h4l3 5.5" /><path d="M10 8H8" /><path d="M13 13.5h5.5" /><path d="M10 8l3.5 5.5-2 4" /></>);
+
 export const HandCoins = (p: IconProps) =>
   base(p, <><circle cx="8" cy="8" r="3.5" /><path d="M8 6v4M6.5 7.2h3" /><path d="M2.5 19.5 6 17.8a2.5 2.5 0 0 1 1.6-.2l3.6.8a1.6 1.6 0 0 0 1.7-.6l3.2-4.1a1.4 1.4 0 0 0-2.2-1.7l-2.4 2.7" /><path d="M8.9 17.4 13 16a1.6 1.6 0 0 1 1.9.7l.5.8 4.9-3.2a1.3 1.3 0 0 1 1.7 1.9l-5.6 5.4a3 3 0 0 1-2.6.8l-4.7-.9" /></>);
 

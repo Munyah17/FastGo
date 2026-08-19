@@ -4,12 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import OnboardingStepHeader from "../OnboardingStepHeader";
 import { ShieldCheck } from "@/components/Icons";
-import { vehicle } from "@/lib/data";
+import { vehicle, vehicleDesignations, type VehicleDesignationId } from "@/lib/data";
 
 export default function VehicleInfoStep() {
   const [make, setMake] = useState(vehicle.make);
   const [model, setModel] = useState(vehicle.model);
   const [plate, setPlate] = useState(vehicle.plate);
+  const [designation, setDesignation] = useState<VehicleDesignationId>(vehicle.designation);
 
   return (
     <div>
@@ -89,6 +90,36 @@ export default function VehicleInfoStep() {
               onChange={(e) => setPlate(e.target.value)}
               className="mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-[14.5px] font-semibold tracking-wider outline-none focus:border-brand"
             />
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <label className="text-[13px] font-semibold text-sub">
+            Vehicle Designation
+          </label>
+          <p className="mt-0.5 text-[12px] text-sub">
+            What kind of requests should this vehicle be matched with?
+          </p>
+          <div className="mt-2.5 grid grid-cols-2 gap-2">
+            {vehicleDesignations.map((d) => {
+              const active = d.id === designation;
+              return (
+                <button
+                  key={d.id}
+                  onClick={() => setDesignation(d.id)}
+                  className={`rounded-xl border-2 px-3 py-2.5 text-left transition-colors ${
+                    active ? "border-brand bg-brand-soft" : "border-line bg-white"
+                  }`}
+                >
+                  <span className={`block text-[13.5px] font-semibold ${active ? "text-brand" : "text-ink"}`}>
+                    {d.label}
+                  </span>
+                  <span className="mt-0.5 block text-[11px] leading-snug text-sub">
+                    {d.description}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 

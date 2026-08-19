@@ -32,7 +32,7 @@ const menuItems = [
 ];
 
 export default function NavDrawer() {
-  const { mode, setMode, drawerOpen, closeDrawer } = useMode();
+  const { mode, setMode, drawerOpen, closeDrawer, online, setOnline } = useMode();
   const otherMode = mode === "passenger" ? "driver" : "passenger";
   const tier = computeTier(user.trips, user.rating, user.memberSinceMonths);
 
@@ -90,6 +90,37 @@ export default function NavDrawer() {
         </div>
 
         <div className="sticky bottom-0 border-t border-line bg-white px-4 py-4">
+          {mode === "driver" && (
+            <div
+              className={`mb-3 flex items-center gap-3 rounded-xl px-3.5 py-3 ${
+                online ? "bg-good-soft" : "bg-page"
+              }`}
+            >
+              <span className="flex-1">
+                <span className="block text-[13.5px] font-bold">
+                  {online ? "You're Online" : "You're Offline"}
+                </span>
+                <span className="block text-[11.5px] text-sub">
+                  {online ? "Receiving nearby ride requests" : "Go online to start receiving requests"}
+                </span>
+              </span>
+              <button
+                role="switch"
+                aria-checked={online}
+                aria-label="Go online"
+                onClick={() => setOnline(!online)}
+                className={`h-7 w-12 shrink-0 rounded-full p-1 transition-colors ${
+                  online ? "bg-good" : "bg-line"
+                }`}
+              >
+                <span
+                  className={`block h-5 w-5 rounded-full bg-white shadow transition-transform ${
+                    online ? "translate-x-5" : ""
+                  }`}
+                />
+              </button>
+            </div>
+          )}
           <button
             onClick={() => {
               setMode(otherMode);
